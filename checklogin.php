@@ -1,12 +1,9 @@
 <?php
 
 require_once "config.php";
-
 session_start();
 
-// echo session_save_path();
-
-if(!$_SESSION["loggedin"]) {
+if(!isset($_SESSION["loggedin"])) {
     header("location: signin.php");
     exit;
     
