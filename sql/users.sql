@@ -9,3 +9,36 @@ CREATE TABLE users (
     lastlogin DATETIME,
     active TINYINT DEFAULT 1
 );
+
+DROP TABLE IF EXISTS messages;
+CREATE TABLE messages (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    send_id INT NOT NULL,
+    recp_id INT NOT NULL,
+    subject VARCHAR(255),
+    message TEXT,
+    send_time DATETIME DEFAULT NOW(),
+    readed TINYINT DEFAULT 0,
+    
+    FOREIGN KEY (send_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (recp_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
+INSERT INTO messages (send_id, recp_id, subject, message) VALUES
+	(1, 6, "hello", "Hellofdsa, "),
+    (3, 4, "hello", "Helloadfsa "),
+    (1, 6, "hello", "Hello fser2"),
+    (5, 6, "hi", "hi ffddude!!!) ");
+
+SELECT
+	u.username sender,
+	m.recp_id,
+    m.subject,
+    m.message,
+    m.send_time
+FROM
+	messages m
+INNER JOIN
+	users u
+ON m.send_id = u.id
+WHERE m.recp_id = 6;

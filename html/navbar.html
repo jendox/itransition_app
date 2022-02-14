@@ -6,10 +6,13 @@
       <div class="collapse navbar-collapse" id="navbarsExample02">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="userlist.php">User list</a>
+            <a class="nav-link <?=$navuserlist?>" aria-current="page" href="userlist.php">User list</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-muted" href="messages.php">Messages</a>
+            <a class="nav-link <?=$navmessage?>" href="messenger.php">Messenger</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?=$navmessage?>" href="message_history.php">Message history</a>
           </li>
         </ul>
         <form action="logout.php">

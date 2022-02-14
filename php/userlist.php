@@ -4,7 +4,6 @@ $title = "User list";
 include("../html/header.html");
 ?>
 
-
 <body>
     <?php include("../html/navbar.html"); ?>
 
@@ -44,6 +43,7 @@ include("../html/header.html");
       </form>
     </div>
 </body>
+</html>
 <!-- Custom styles for this template -->
 <link href="../css/userlist.css" rel="stylesheet">
-<script src="../js/main.js"></script>
+<script src="../js/allusers-check.js"></script>

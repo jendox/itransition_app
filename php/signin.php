@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
   if(empty($username_err) && empty($password_err)) {
 
-    $sql = "SELECT id, username, password, active FROM users WHERE username = ?";
+    $sql = "SELECT id, username, password, active, salt FROM users WHERE username = ?";
     
     if($stmt = $mysqli->prepare($sql)) {
 
@@ -26,11 +26,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         
         if($stmt->num_rows == 1) {
           
-          $stmt->bind_result($id, $username, $hashed_password, $userstate);
+          $stmt->bind_result($id, $username, $hashed_password, $userstate, $salt);
           
           if($stmt->fetch()) {
             // echo $id, $username, $password, $userstate;
-            if(password_verify($password,$hashed_password)) {
+            if(password_verify($salt+$password,$hashed_password)) {
               
               if ($userstate) {
                 session_start();
@@ -51,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $stmt->close();
                 $mysqli->close();
 
-                header("Location: userlist.php");
+                header("Location: messenger.php");
                 exit;
               }
               else {
