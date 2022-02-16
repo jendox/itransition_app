@@ -53,9 +53,9 @@ if($_POST["query"] == "load") {
         if($stmt = $mysqli->prepare($sql)) {
             $stmt->bind_param("iiss", $param_sid, $param_rid, $param_subject, $param_message);
             $param_sid = (int)$_SESSION["id"];
-            $param_rid = (int)$data[0]["value"];
-            $param_subject = $data[1]["value"];
-            $param_message = $data[2]["value"];
+            $param_rid = (int)$data["id"];
+            $param_subject = $data["subject"];
+            $param_message = $data["message"];
             if($stmt->execute()) {
                 $sql_err = $stmt->errno;
             }
@@ -67,6 +67,15 @@ if($_POST["query"] == "load") {
         $retr["status"] = "Error: No data to send";
     }
     $retr["status"] = $sql_err == 0 ? "ok" : "Error: $sql_err";
+} elseif($_POST["query"] == "users") {
+    $sql = "SELECT id, username FROM users";
+    $result = $mysqli->query($sql);
+    while ($row = $result->fetch_assoc()) {
+        if ($row["id"] != $_SESSION["id"]) {
+            $users[] = $row;
+        }
+    }
+    $retr["data"] = $users;
 } else {
     $retr["status"] = "Error: unknown query";
 }

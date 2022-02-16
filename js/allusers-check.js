@@ -1,9 +1,9 @@
-function selectCheckboxes() {
-    var mainCheckbox = document.getElementById("mainCheckbox");
-    var checkBoxes = document.getElementsByClassName("userCheckbox");
-    if (checkBoxes.length != 0) {
-        for (var i=0; i < checkBoxes.length; i++) {
-            checkBoxes[i].checked = mainCheckbox.checked;
+$(document).ready(function () {
+
+    $('#mainCheckbox').click((e) => {
+        for(let user of $('.userCheckbox')) {
+            user.checked = e.currentTarget.checked;
         }
-    }
-}
+    });
+
+});

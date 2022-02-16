@@ -7,7 +7,8 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     created DATETIME NOT NULL DEFAULT NOW(),
     lastlogin DATETIME,
-    active TINYINT DEFAULT 1
+    active TINYINT DEFAULT 1,
+    salt VARCHAR(255)
 );
 
 DROP TABLE IF EXISTS messages;
@@ -28,7 +29,7 @@ INSERT INTO messages (send_id, recp_id, subject, message) VALUES
 	(1, 6, "hello", "Hellofdsa, "),
     (3, 4, "hello", "Helloadfsa "),
     (1, 6, "hello", "Hello fser2"),
-    (5, 6, "hi", "hi ffddude!!!) ");
+    (5, 6, "hi", "hi ddude!!!) ");
 
 SELECT
 	u.username sender,
